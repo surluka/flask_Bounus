@@ -8,6 +8,7 @@
 # save_to_file(keyword, jobs)
 
 from flask import Flask, render_template, request 
+from extractors.wanted import extract_wanted_jobs
 
 app = Flask("JobScrapper")
 
@@ -19,6 +20,7 @@ def home():
 @app.route("/search")
 def a_dir():
     keyword = request.args.get("keyword")
-    return render_template("search.html", keyword = keyword)
+    jobs = extract_wanted_jobs(keyword)
+    return render_template("search.html", keyword = keyword, jobs = jobs)
 
-app.run("0.0.0.3")
+app.run("0.0.0.0")
