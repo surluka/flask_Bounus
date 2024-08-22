@@ -7,17 +7,18 @@
 
 # save_to_file(keyword, jobs)
 
-from flask import Flask, render_template 
+from flask import Flask, render_template, request 
 
 app = Flask("JobScrapper")
 
 @app.route("/")
 def home():
     return render_template("home.html", name = "최은석")
-    
+
 
 @app.route("/search")
 def a_dir():
-    return render_template("search.html")
+    keyword = request.args.get("keyword")
+    return render_template("search.html", keyword = keyword)
 
 app.run("0.0.0.0")
